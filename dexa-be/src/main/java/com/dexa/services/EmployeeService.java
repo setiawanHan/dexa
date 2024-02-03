@@ -18,10 +18,6 @@ import java.util.Optional;
 @Service
 public class EmployeeService {
 
-    // update employee to inactive (x)
-    // get employees by role_id (x)
-    // get employee active / inactive (x)
-
     private final EmployeeRepo employeeRepo;
     private final EmployeeProfilesRepo employeeProfilesRepo;
 

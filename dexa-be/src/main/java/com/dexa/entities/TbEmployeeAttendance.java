@@ -1,5 +1,6 @@
 package com.dexa.entities;
 
+import com.dexa.utils.TimeZoneConverter;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -7,7 +8,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.math.BigInteger;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "tb_employee_attendance")
@@ -19,6 +20,7 @@ public class TbEmployeeAttendance {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "attendance_id")
     private BigInteger attendanceId;
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -26,7 +28,8 @@ public class TbEmployeeAttendance {
     private TbEmployee employee;
 
     @Column(name = "date_and_time")
-    private Timestamp dateAndTime;
+    @Convert(converter = TimeZoneConverter.class)
+    private LocalDateTime dateAndTime;
 
     @Column(name = "status")
     private String status;
