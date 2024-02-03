@@ -2,6 +2,7 @@ package com.dexa.controller;
 
 import com.dexa.api.EmployeeApi;
 import com.dexa.entities.TbEmployee;
+import com.dexa.entities.TbEmployeeProfiles;
 import com.dexa.models.EmployeeModel;
 import com.dexa.models.RestWrapper;
 import com.dexa.services.EmployeeService;
@@ -9,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.math.BigInteger;
 
 @RestController
 public class EmployeeController implements EmployeeApi {
@@ -49,5 +52,15 @@ public class EmployeeController implements EmployeeApi {
                         HttpStatus.OK,
                         "OK",
                         employeeService.updateEmployeePassword(employeeEmail, employeeRawPassword));
+    }
+
+    @Override
+    public ResponseEntity<RestWrapper<TbEmployeeProfiles>> getEmployeeProfile(BigInteger employeeId) {
+        return new RestWrapper<TbEmployeeProfiles>().responseWrapper(
+                HttpStatus.OK.value(),
+                HttpStatus.OK,
+                "OK",
+                employeeService.getEmployeeProfileByEmployeeId(employeeId)
+        );
     }
 }

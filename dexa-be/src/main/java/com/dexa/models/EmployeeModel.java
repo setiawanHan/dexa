@@ -9,5 +9,6 @@ import lombok.*;
 public class EmployeeModel {
     private String employeeEmail;
     private String employeePassword;
+    private EmployeeProfileModel employeeProfileModel;
     private RoleModel roleModel;
 }

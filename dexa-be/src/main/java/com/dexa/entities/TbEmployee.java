@@ -31,6 +31,10 @@ public class TbEmployee {
     private boolean employeeIsActive = true;
 
     @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "employee_profile_id", referencedColumnName = "employee_profile_id")
+    private TbEmployeeProfiles employeeProfiles;
+
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "role_id", referencedColumnName = "role_id")
     private TbRoles role;
 

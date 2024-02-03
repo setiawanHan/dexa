@@ -1,6 +1,7 @@
 package com.dexa.services;
 
 import com.dexa.entities.TbRoles;
+import com.dexa.exception.DexaException;
 import com.dexa.models.RoleModel;
 import com.dexa.repo.RolesRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,12 +26,16 @@ public class RolesService {
 
     public TbRoles getRoleById(BigInteger roleId) {
         Optional<TbRoles> roleData = rolesRepo.findById(roleId);
-        return roleData.orElse(null);
+        if (!roleData.isPresent())
+            throw new DexaException("Role not found. (role_id = " + roleId + ")");
+        return roleData.get();
     }
 
     public TbRoles getRoleByName(String roleName) {
         Optional<TbRoles> roleData = rolesRepo.findByRoleName(roleName);
-        return roleData.orElse(null);
+        if (!roleData.isPresent())
+            throw new DexaException("Role not found. (role_name = " + roleName + ")");
+        return roleData.get();
     }
 
     public TbRoles addRole(RoleModel roleModel) {
