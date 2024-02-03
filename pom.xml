@@ -44,6 +44,12 @@
                 <artifactId>spring-boot-starter-data-jpa</artifactId>
                 <version>${springboot.parent.version}</version>
             </dependency>
+            <!-- spring boot starter security -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-security</artifactId>
+                <version>${springboot.parent.version}</version>
+            </dependency>
             <!-- lombok -->
             <dependency>
                 <groupId>org.projectlombok</groupId>

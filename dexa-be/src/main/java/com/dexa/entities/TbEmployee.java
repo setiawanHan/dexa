@@ -28,7 +28,7 @@ public class TbEmployee {
     private String employeePassword;
 
     @Column(name = "is_active")
-    private boolean employeeIsActive;
+    private boolean employeeIsActive = true;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "role_id", referencedColumnName = "role_id")

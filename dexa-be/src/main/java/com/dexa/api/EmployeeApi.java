@@ -1,14 +1,27 @@
 package com.dexa.api;
 
-public interface EmployeeApi {
-    // add new employee
-    // get employee by email
-    // get employee active / inactive
-    // get employees by role_id
-    // update employee password
-    // update employee to inactive
+import com.dexa.entities.TbEmployee;
+import com.dexa.models.EmployeeModel;
+import com.dexa.models.RestWrapper;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-    /* ----- employee profiles ----- */
-    // get employee profiles
-    // update employee profile phone number
+@Tag(name = "EMPLOYEE", description = "EmployeeApi.class")
+public interface EmployeeApi {
+    @PostMapping(
+            value = "/api/employee/add",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<RestWrapper<TbEmployee>> addNewEmployee(@RequestBody EmployeeModel request);
+
+    @GetMapping(
+            value = "/api/employee/byEmail",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<RestWrapper<TbEmployee>> getEmployeeByEmail(@RequestParam(name = "employeeEmail") String employeeEmail);
+
+    @PutMapping(value = "/api/employee/password/update")
+    ResponseEntity<RestWrapper<String>> updateEmployeePassword(@RequestParam(name = "employeeEmail") String employeeEmail,
+                                                               @RequestParam(name = "employeeRawPassword") String employeeRawPassword);
 }

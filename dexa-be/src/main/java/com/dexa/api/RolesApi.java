@@ -15,12 +15,16 @@ import java.util.List;
 
 @Tag(name = "ROLES", description = "RolesApi.class")
 public interface RolesApi {
+
     @GetMapping("/api/roles/all")
     ResponseEntity<List<TbRoles>> getAllRoles();
+
     @GetMapping("/api/roles/byId")
     ResponseEntity<TbRoles> getRoleById(@RequestParam(name = "roleId") BigInteger roleId);
+
     @GetMapping("/api/roles/byName")
     ResponseEntity<TbRoles> getRoleByName(@RequestParam(name = "roleName") String roleName);
+
     @PostMapping(
             value = "/api/roles/add",
             consumes = MediaType.APPLICATION_JSON_VALUE,
