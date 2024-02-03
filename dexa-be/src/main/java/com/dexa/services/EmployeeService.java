@@ -4,6 +4,7 @@ import com.dexa.entities.TbEmployee;
 import com.dexa.entities.TbEmployeeProfiles;
 import com.dexa.exception.DexaException;
 import com.dexa.models.EmployeeModel;
+import com.dexa.repo.EmployeeProfilesRepo;
 import com.dexa.repo.EmployeeRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,19 +23,21 @@ public class EmployeeService {
     // get employee active / inactive (x)
 
     private final EmployeeRepo employeeRepo;
+    private final EmployeeProfilesRepo employeeProfilesRepo;
 
     private final PasswordService passwordService;
     private final RolesService rolesService;
 
     @Autowired
     public EmployeeService(EmployeeRepo employeeRepo,
+                           EmployeeProfilesRepo employeeProfilesRepo,
                            PasswordService passwordService,
                            RolesService rolesService) {
         this.employeeRepo = employeeRepo;
+        this.employeeProfilesRepo = employeeProfilesRepo;
         this.rolesService = rolesService;
         this.passwordService = passwordService;
     }
-
 
     /* ---------- EMPLOYEE ---------- */
     public TbEmployee addNewEmployee(EmployeeModel request) {
@@ -79,8 +82,8 @@ public class EmployeeService {
         return employee.get();
     }
 
-    public String updateEmployeePassword(String employeeEmail, String newEmployeePassword) {
-        TbEmployee employee = this.getEmployeeByEmail(employeeEmail);
+    public String updateEmployeePassword(BigInteger employeeId, String newEmployeePassword) {
+        TbEmployee employee = this.getEmployeeById(employeeId);
         employee.setEmployeePassword(passwordService.encryptPassword(newEmployeePassword));
         employeeRepo.save(employee);
         return employee.getEmployeeEmail();
@@ -90,5 +93,16 @@ public class EmployeeService {
     public TbEmployeeProfiles getEmployeeProfileByEmployeeId(BigInteger employeeId) {
         return this.getEmployeeById(employeeId).getEmployeeProfiles();
     }
+
+    public String updateEmployeePhone(BigInteger employeeId, String newPhoneNumber) {
+        TbEmployeeProfiles employeeProfiles = this.getEmployeeProfileByEmployeeId(employeeId);
+        employeeProfiles.setEmployeePhone(newPhoneNumber);
+        employeeProfilesRepo.save(employeeProfiles);
+        return employeeProfiles.getEmployeePhone();
+    }
+
+    /* ---------- MIX EMPLOYEE & EMPLOYEE PROFILES */
+//    public String updateEmployeePhoneAndPasswordByEmployeeId(BigInteger employeeId,
+//                                                             String )
 
 }

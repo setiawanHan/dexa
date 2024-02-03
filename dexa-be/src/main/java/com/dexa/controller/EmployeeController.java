@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigInteger;
+import java.util.Objects;
 
 @RestController
 public class EmployeeController implements EmployeeApi {
@@ -44,23 +45,32 @@ public class EmployeeController implements EmployeeApi {
     }
 
     @Override
-    public ResponseEntity<RestWrapper<String>> updateEmployeePassword(String employeeEmail,
-                                                                      String employeeRawPassword) {
-        return new RestWrapper<String>()
-                .responseWrapper(
-                        HttpStatus.OK.value(),
-                        HttpStatus.OK,
-                        "OK",
-                        employeeService.updateEmployeePassword(employeeEmail, employeeRawPassword));
-    }
-
-    @Override
     public ResponseEntity<RestWrapper<TbEmployeeProfiles>> getEmployeeProfile(BigInteger employeeId) {
         return new RestWrapper<TbEmployeeProfiles>().responseWrapper(
                 HttpStatus.OK.value(),
                 HttpStatus.OK,
                 "OK",
-                employeeService.getEmployeeProfileByEmployeeId(employeeId)
-        );
+                employeeService.getEmployeeProfileByEmployeeId(employeeId));
+    }
+
+    @Override
+    public ResponseEntity<RestWrapper<String>> updatePasswordAndPhone(BigInteger employeeId,
+                                                                      String employeeNewPassword,
+                                                                      String employeeNewPhone) {
+        if (!Objects.isNull(employeeNewPassword)) {
+            if (!"".equals(employeeNewPassword)) {
+                employeeService.updateEmployeePassword(employeeId, employeeNewPassword);
+            }
+        }
+        if (!Objects.isNull(employeeNewPhone)) {
+            if (!"".equals(employeeNewPhone)) {
+                employeeService.updateEmployeePhone(employeeId, employeeNewPhone);
+            }
+        }
+        return new RestWrapper<String>().responseWrapper(
+                HttpStatus.OK.value(),
+                HttpStatus.OK,
+                "OK",
+                "Password and/or Phone has been updated.");
     }
 }
