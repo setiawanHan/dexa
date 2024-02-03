@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.7.5</version>
+        <version>2.6.7</version>
         <relativePath/>
     </parent>
     <!-- about application -->
@@ -16,7 +16,12 @@
     <packaging>pom</packaging>
     <!-- properties -->
     <properties>
+        <encoding>UTF-8</encoding>
         <java.version>1.8</java.version>
+        <springboot.parent.version>2.6.7</springboot.parent.version>
+
+        <dexa.war.name>dexa</dexa.war.name>
+        <dexa.be.version>1.0.0-SNAPSHOT</dexa.be.version>
     </properties>
     <!-- dependency management -->
     <dependencyManagement>
@@ -25,8 +30,33 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-web</artifactId>
-                <version>${parent.version}</version>
+                <version>${springboot.parent.version}</version>
             </dependency>
+            <!-- mysql connector -->
+            <dependency>
+                <groupId>com.mysql</groupId>
+                <artifactId>mysql-connector-j</artifactId>
+                <version>8.0.33</version>
+            </dependency>
+            <!-- spring bott starter data jpa -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-jpa</artifactId>
+                <version>${springboot.parent.version}</version>
+            </dependency>
+            <!-- lombok -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>1.18.30</version>
+            </dependency>
+            <!-- swagger open api -->
+            <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-ui</artifactId>
+                <version>1.6.14</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
     <!-- modules -->
