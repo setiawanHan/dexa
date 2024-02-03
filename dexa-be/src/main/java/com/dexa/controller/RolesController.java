@@ -2,6 +2,7 @@ package com.dexa.controller;
 
 import com.dexa.api.RolesApi;
 import com.dexa.entities.TbRoles;
+import com.dexa.models.RestWrapper;
 import com.dexa.models.RoleModel;
 import com.dexa.services.RolesService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,22 +23,39 @@ public class RolesController implements RolesApi {
     }
 
     @Override
-    public ResponseEntity<List<TbRoles>> getAllRoles() {
-        return new ResponseEntity<>(rolesService.getAllRoles(), HttpStatus.OK);
+    public ResponseEntity<RestWrapper<List<TbRoles>>> getAllRoles() {
+        return new RestWrapper<List<TbRoles>>().responseWrapper(
+                HttpStatus.OK.value(),
+                HttpStatus.OK,
+                "OK",
+                rolesService.getAllRoles());
     }
 
     @Override
-    public ResponseEntity<TbRoles> getRoleById(BigInteger roleId) {
-        return new ResponseEntity<>(rolesService.getRoleById(roleId), HttpStatus.OK);
+    public ResponseEntity<RestWrapper<TbRoles>> getRoleById(BigInteger roleId) {
+        return new RestWrapper<TbRoles>().responseWrapper(
+                HttpStatus.OK.value(),
+                HttpStatus.OK,
+                "OK",
+                rolesService.getRoleById(roleId));
     }
 
     @Override
-    public ResponseEntity<TbRoles> getRoleByName(String roleName) {
-        return new ResponseEntity<>(rolesService.getRoleByName(roleName), HttpStatus.OK);
+    public ResponseEntity<RestWrapper<TbRoles>> getRoleByName(String roleName) {
+        return new RestWrapper<TbRoles>().responseWrapper(
+                HttpStatus.OK.value(),
+                HttpStatus.OK,
+                "OK",
+                rolesService.getRoleByName(roleName));
     }
 
     @Override
-    public ResponseEntity<TbRoles> addRole(RoleModel request) {
-        return new ResponseEntity<>(rolesService.addRole(request), HttpStatus.CREATED);
+    public ResponseEntity<RestWrapper<TbRoles>> addRole(RoleModel request) {
+        return new RestWrapper<TbRoles>().responseWrapper(
+                HttpStatus.CREATED.value(),
+                HttpStatus.CREATED,
+                "OK",
+                rolesService.addRole(request)
+        );
     }
 }

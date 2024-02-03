@@ -13,9 +13,6 @@ import java.util.Optional;
 
 @Service
 public class EmployeeService {
-    // add new employee
-    // get employee by email
-    // update employee password
 
     // update employee to inactive (x)
     // get employees by role_id (x)

@@ -1,6 +1,7 @@
 package com.dexa.api;
 
 import com.dexa.entities.TbRoles;
+import com.dexa.models.RestWrapper;
 import com.dexa.models.RoleModel;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.MediaType;
@@ -17,18 +18,18 @@ import java.util.List;
 public interface RolesApi {
 
     @GetMapping("/api/roles/all")
-    ResponseEntity<List<TbRoles>> getAllRoles();
+    ResponseEntity<RestWrapper<List<TbRoles>>> getAllRoles();
 
     @GetMapping("/api/roles/byId")
-    ResponseEntity<TbRoles> getRoleById(@RequestParam(name = "roleId") BigInteger roleId);
+    ResponseEntity<RestWrapper<TbRoles>> getRoleById(@RequestParam(name = "roleId") BigInteger roleId);
 
     @GetMapping("/api/roles/byName")
-    ResponseEntity<TbRoles> getRoleByName(@RequestParam(name = "roleName") String roleName);
+    ResponseEntity<RestWrapper<TbRoles>> getRoleByName(@RequestParam(name = "roleName") String roleName);
 
     @PostMapping(
             value = "/api/roles/add",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<TbRoles> addRole(@RequestBody RoleModel request);
+    ResponseEntity<RestWrapper<TbRoles>> addRole(@RequestBody RoleModel request);
 
 }
