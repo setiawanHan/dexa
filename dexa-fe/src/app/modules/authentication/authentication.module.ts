@@ -4,6 +4,7 @@ import { AuthenticationComponent } from './authentication.component';
 import {RouterModule, Routes} from '@angular/router';
 import {FormsModule} from '@angular/forms';
 import {AuthenticationService} from '../../core/services/AuthenticationService';
+import {SharedModule} from '../../shared/shared-module';
 
 const authRoute: Routes = [
   { path: '', component: AuthenticationComponent }
@@ -16,7 +17,8 @@ const authRoute: Routes = [
   imports: [
     CommonModule,
     FormsModule,
-    RouterModule.forChild(authRoute)
+    RouterModule.forChild(authRoute),
+    SharedModule
   ],
   providers: [
     AuthenticationService

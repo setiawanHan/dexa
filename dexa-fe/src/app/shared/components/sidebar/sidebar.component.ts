@@ -7,5 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
   constructor() { }
-  ngOnInit(): void {}
+
+  public hideSideBar = true;
+
+  ngOnInit(): void {
+    this.checkSessionToShowOrHideNavBar();
+  }
+
+  private checkSessionToShowOrHideNavBar(): void {
+    if (sessionStorage.getItem('EMPLOYEE_CREDS') == null) {
+      this.hideSideBar = true;
+    } else {
+      this.hideSideBar = false;
+    }
+  }
 }

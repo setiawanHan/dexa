@@ -2,6 +2,7 @@ import {NgModule} from '@angular/core';
 import {HeaderComponent} from './components/header/header.component';
 import {CommonModule} from '@angular/common';
 import {SidebarComponent} from './components/sidebar/sidebar.component';
+import {AuthenticationService} from '../core/services/AuthenticationService';
 
 @NgModule({
   declarations: [
@@ -12,6 +13,7 @@ import {SidebarComponent} from './components/sidebar/sidebar.component';
     HeaderComponent,
     SidebarComponent
   ],
-  imports: [CommonModule]
+  imports: [CommonModule],
+  providers: [AuthenticationService]
 })
-export class SharedModule { }
+export class SharedModule {}

@@ -13,8 +13,9 @@ export class AuthenticationService implements IAuthentication {
     const url = `/dexa/api/auth/login?employeeEmail=${employeeEmail}&employeePassword=${employeePassword}`;
     return this.http.get<RestWrapper<AuthModel>>(url).toPromise();
   }
-  logout(employeeEmail: string): Observable<RestWrapper<string>> {
-    throw new Error('Method not implemented.');
+  logout(employeeEmail: string): Promise<RestWrapper<string>> {
+    const url = `/dexa/api/auth/logout?employeeEmail=${employeeEmail}`;
+    return this.http.get<RestWrapper<string>>(url).toPromise();
   }
   getAuditLoginByEmployeeEmail(employeeEmail: string): Observable<RestWrapper<TbAuditLogin>> {
     throw new Error('Method not implemented.');

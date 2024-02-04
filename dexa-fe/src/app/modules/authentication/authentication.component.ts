@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AuthenticationService} from '../../core/services/AuthenticationService';
 import {RestWrapper} from '../../model/rest/RestWrapper';
 import {AuthModel} from '../../model/AuthModel';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-authentication',
@@ -11,14 +12,16 @@ import {AuthModel} from '../../model/AuthModel';
 export class AuthenticationComponent implements OnInit {
   fd = { employeeEmail: '', employeeRawPassword: '' };
 
-  constructor(public authenticationService: AuthenticationService) { }
+  constructor(private authenticationService: AuthenticationService,
+              private router: Router) { }
+
   ngOnInit(): void {}
 
   async onLogin(): Promise<void> {
     await this.authenticationService.login(this.fd.employeeEmail, this.fd.employeeRawPassword)
       .then((d: RestWrapper<AuthModel>) => {
         this.assignToSessionStorage('EMPLOYEE_CREDS', JSON.stringify(d.data));
-        alert('--- sukses ---');
+        this.routeAndReload(['/attendance']);
       }).catch((e: any) => {
         this.clearSessionStorage();
         alert(e.error.responseMessage);
@@ -31,5 +34,9 @@ export class AuthenticationComponent implements OnInit {
   }
   private clearSessionStorage(): void {
     sessionStorage.clear();
+  }
+
+  private routeAndReload(commands: any[]): void {
+    this.router.navigate(commands).then(r => window.location.reload());
   }
 }
