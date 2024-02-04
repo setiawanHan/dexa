@@ -4,7 +4,6 @@ import { AuthenticationComponent } from './authentication.component';
 import {RouterModule, Routes} from '@angular/router';
 import {FormsModule} from '@angular/forms';
 import {AuthenticationService} from '../../core/services/AuthenticationService';
-import {RoleService} from '../../core/services/RoleService';
 
 const authRoute: Routes = [
   { path: '', component: AuthenticationComponent }
@@ -22,6 +21,9 @@ const authRoute: Routes = [
   providers: [
     AuthenticationService
   ],
-  exports: [RouterModule, AuthenticationComponent]
+  exports: [
+    RouterModule,
+    AuthenticationComponent
+  ]
 })
 export class AuthenticationModule {}
