@@ -7,10 +7,15 @@
     <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <li class="nav-item">
-          <a href="#" class="nav-link active"><i class="nav-icon fas fa-clock"></i><p> Attendance </p></a>
+          <a href="/attendance"
+             class="nav-link {{ menuId == '/attendance' ? 'active' : '' }}"
+             (click)="menuIdef('/attendance')">
+            <i class="nav-icon fas fa-clock"></i><p> Attendance </p></a>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link"><i class="nav-icon fas fa-user"></i><p> Profiles </p></a>
+          <a href="/profilez"
+             class="nav-link {{ menuId == '/profilez' ? 'active' : '' }}" (click)="menuIdef('/profilez')">
+            <i class="nav-icon fas fa-user"></i><p> Profiles </p></a>
         </li>
         <li class="nav-item">
           <a href="#" class="nav-link"><i class="nav-icon fas fa-calculator"></i><p> Summary </p></a>

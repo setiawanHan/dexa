@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -6,12 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: []
 })
 export class SidebarComponent implements OnInit {
-  constructor() { }
+  constructor() {}
 
   public hideSideBar = true;
+  public menuId = '';
 
   ngOnInit(): void {
     this.checkSessionToShowOrHideNavBar();
+    this.menuId = sessionStorage.getItem('ACTIVE_MENU') == null ? '/attendance' : sessionStorage.getItem('ACTIVE_MENU') ;
   }
 
   private checkSessionToShowOrHideNavBar(): void {
@@ -20,5 +23,11 @@ export class SidebarComponent implements OnInit {
     } else {
       this.hideSideBar = false;
     }
+  }
+
+  public menuIdef(s: string): void {
+    sessionStorage.removeItem('ACTIVE_MENU');
+    sessionStorage.setItem('ACTIVE_MENU', s);
+    this.menuId = sessionStorage.getItem('ACTIVE_MENU');
   }
 }
