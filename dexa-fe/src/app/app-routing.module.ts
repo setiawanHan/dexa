@@ -1,10 +1,12 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
+import {AuthGuard} from './shared/guard/AuthGuard';
+import {LoginGuard} from './shared/guard/LoginGuard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'authentication', pathMatch: 'full' },
-  { path: 'authentication', loadChildren: () => import('./modules/authentication/authentication.module').then(m => m.AuthenticationModule) },
-  { path: 'attendance', loadChildren: () => import('./modules/attendance/attendance.module').then(m => m.AttendanceModule) }
+  { path: 'authentication', loadChildren: () => import('./modules/authentication/authentication.module').then(m => m.AuthenticationModule), canActivate: [LoginGuard] },
+  { path: 'attendance', loadChildren: () => import('./modules/attendance/attendance.module').then(m => m.AttendanceModule), canActivate: [AuthGuard] }
 ];
 
 @NgModule({
