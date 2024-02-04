@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.math.BigInteger;
 import java.util.List;
 
@@ -23,7 +25,8 @@ public class RolesController implements RolesApi {
     }
 
     @Override
-    public ResponseEntity<RestWrapper<List<TbRoles>>> getAllRoles() {
+    public ResponseEntity<RestWrapper<List<TbRoles>>> getAllRoles(HttpServletRequest servletRequest, HttpServletResponse servletResponse) {
+        System.out.println("JSESSION : " + servletRequest.getSession().getId());
         return new RestWrapper<List<TbRoles>>().responseWrapper(
                 HttpStatus.OK.value(),
                 HttpStatus.OK,
@@ -32,7 +35,8 @@ public class RolesController implements RolesApi {
     }
 
     @Override
-    public ResponseEntity<RestWrapper<TbRoles>> getRoleById(BigInteger roleId) {
+    public ResponseEntity<RestWrapper<TbRoles>> getRoleById(BigInteger roleId, HttpServletRequest servletRequest, HttpServletResponse servletResponse) {
+        System.out.println("JSESSION : " + servletRequest.getSession().getId());
         return new RestWrapper<TbRoles>().responseWrapper(
                 HttpStatus.OK.value(),
                 HttpStatus.OK,
@@ -41,7 +45,8 @@ public class RolesController implements RolesApi {
     }
 
     @Override
-    public ResponseEntity<RestWrapper<TbRoles>> getRoleByName(String roleName) {
+    public ResponseEntity<RestWrapper<TbRoles>> getRoleByName(String roleName, HttpServletRequest servletRequest, HttpServletResponse servletResponse) {
+        System.out.println("JSESSION : " + servletRequest.getSession().getId());
         return new RestWrapper<TbRoles>().responseWrapper(
                 HttpStatus.OK.value(),
                 HttpStatus.OK,
@@ -50,7 +55,8 @@ public class RolesController implements RolesApi {
     }
 
     @Override
-    public ResponseEntity<RestWrapper<TbRoles>> addRole(RoleModel request) {
+    public ResponseEntity<RestWrapper<TbRoles>> addRole(RoleModel request, HttpServletRequest servletRequest, HttpServletResponse servletResponse) {
+        System.out.println("JSESSION : " + servletRequest.getSession().getId());
         return new RestWrapper<TbRoles>().responseWrapper(
                 HttpStatus.CREATED.value(),
                 HttpStatus.CREATED,

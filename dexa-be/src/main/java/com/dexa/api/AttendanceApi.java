@@ -4,21 +4,16 @@ import com.dexa.entities.TbEmployeeAttendance;
 import com.dexa.enums.AttendanceStatusEnum;
 import com.dexa.models.RestWrapper;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.math.BigInteger;
-import java.time.LocalDate;
 import java.util.List;
 
 @Tag(name = "ATTENDANCE", description = "AttendanceApi.class")
 public interface AttendanceApi {
-    // get employee attendance by employee id
-    // get employee summaries attendance ( awal bulan - hari ini )
-    // get employee attendance by range date
 
     @GetMapping(
             value = "/api/attendance/hit",
