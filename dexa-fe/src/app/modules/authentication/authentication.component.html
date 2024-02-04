@@ -1,0 +1,34 @@
+<body class="hold-transition login-page">
+<div class="login-box">
+  <div class="card">
+    <div class="card-body login-card-body">
+      <p class="login-box-msg"><b>ATTENDANCE SYSTEM</b></p>
+      <form #mployeeLogin (ngSubmit)="onLogin()" novalidate>
+        <div class="input-group mb-3">
+          <input type="email"
+                 id="employeeEmail"
+                 name="employeeEmail"
+                 [(ngModel)]="fd.employeeEmail"
+                 class="form-control"
+                 placeholder="Email">
+          <div class="input-group-append">
+            <div class="input-group-text"><span class="fas fa-envelope"></span></div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="password"
+                 id="employeeRawPassword"
+                 name="employeeRawPassword"
+                 [(ngModel)]="fd.employeeRawPassword"
+                 class="form-control"
+                 placeholder="Password">
+          <div class="input-group-append">
+            <div class="input-group-text"><span class="fas fa-lock"></span></div>
+          </div>
+        </div>
+        <button type="submit" class="btn-block btn-danger"><i class="fa fa-power-off mr-1"></i> Login</button>
+      </form>
+    </div>
+  </div>
+</div>
+</body>

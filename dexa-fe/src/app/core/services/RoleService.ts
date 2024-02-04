@@ -1,15 +1,12 @@
 import {Injectable} from '@angular/core';
-import {IRoles} from './interfaces/IRoles';
-import {RestWrapper} from '../../model/rest/RestWrapper';
-import {TbRoles} from '../../model/TbRoles';
 import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {IRoles} from '../interfaces/IRoles';
 
 @Injectable()
 export class RoleService implements IRoles {
   constructor(private http: HttpClient) {}
-  public getRoleById(roleId: number): Observable<RestWrapper<TbRoles>> {
+  public getRoleById(roleId: number): Promise<any> {
     const url = `/dexa/api/roles/byId?roleId=${roleId}`;
-    return this.http.get<RestWrapper<TbRoles>>(url);
+    return this.http.get(url).toPromise();
   }
 }

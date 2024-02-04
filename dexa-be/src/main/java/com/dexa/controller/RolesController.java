@@ -26,7 +26,6 @@ public class RolesController implements RolesApi {
 
     @Override
     public ResponseEntity<RestWrapper<List<TbRoles>>> getAllRoles(HttpServletRequest servletRequest, HttpServletResponse servletResponse) {
-        System.out.println("JSESSION : " + servletRequest.getSession().getId());
         return new RestWrapper<List<TbRoles>>().responseWrapper(
                 HttpStatus.OK.value(),
                 HttpStatus.OK,
@@ -36,7 +35,6 @@ public class RolesController implements RolesApi {
 
     @Override
     public ResponseEntity<RestWrapper<TbRoles>> getRoleById(BigInteger roleId, HttpServletRequest servletRequest, HttpServletResponse servletResponse) {
-        System.out.println("JSESSION : " + servletRequest.getSession().getId());
         return new RestWrapper<TbRoles>().responseWrapper(
                 HttpStatus.OK.value(),
                 HttpStatus.OK,
@@ -46,7 +44,6 @@ public class RolesController implements RolesApi {
 
     @Override
     public ResponseEntity<RestWrapper<TbRoles>> getRoleByName(String roleName, HttpServletRequest servletRequest, HttpServletResponse servletResponse) {
-        System.out.println("JSESSION : " + servletRequest.getSession().getId());
         return new RestWrapper<TbRoles>().responseWrapper(
                 HttpStatus.OK.value(),
                 HttpStatus.OK,
@@ -56,7 +53,6 @@ public class RolesController implements RolesApi {
 
     @Override
     public ResponseEntity<RestWrapper<TbRoles>> addRole(RoleModel request, HttpServletRequest servletRequest, HttpServletResponse servletResponse) {
-        System.out.println("JSESSION : " + servletRequest.getSession().getId());
         return new RestWrapper<TbRoles>().responseWrapper(
                 HttpStatus.CREATED.value(),
                 HttpStatus.CREATED,

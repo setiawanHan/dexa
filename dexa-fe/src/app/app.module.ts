@@ -3,7 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import {HttpClientModule} from '@angular/common/http';
-import {RoleService} from './core/services/RoleService';
+import {AppRoutingModule} from './app-routing.module';
+import {RouterModule} from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -11,11 +12,11 @@ import {RoleService} from './core/services/RoleService';
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    AppRoutingModule,
+    RouterModule
   ],
-  providers: [
-    RoleService
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
