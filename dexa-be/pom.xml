@@ -7,6 +7,7 @@
         <groupId>org.dexa</groupId>
         <artifactId>dexa-parent</artifactId>
         <version>1.0.0-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
     <!-- about application -->
     <groupId>com.dexa</groupId>
@@ -51,6 +52,12 @@
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-ui</artifactId>
+        </dependency>
+        <!-- dexa-fe -->
+        <dependency>
+            <groupId>com.dexa</groupId>
+            <artifactId>dexa-fe</artifactId>
+            <scope>runtime</scope>
         </dependency>
     </dependencies>
     <!-- build -->

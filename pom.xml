@@ -22,6 +22,7 @@
 
         <dexa.war.name>dexa</dexa.war.name>
         <dexa.be.version>1.0.0-SNAPSHOT</dexa.be.version>
+        <dexa.fe.version>1.0.0-SNAPSHOT</dexa.fe.version>
     </properties>
     <!-- dependency management -->
     <dependencyManagement>
@@ -62,11 +63,28 @@
                 <artifactId>springdoc-openapi-ui</artifactId>
                 <version>1.6.14</version>
             </dependency>
-
+            <!-- dexa-fe -->
+            <dependency>
+                <groupId>com.dexa</groupId>
+                <artifactId>dexa-fe</artifactId>
+                <version>${dexa.fe.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>3.2.0</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
     <!-- modules -->
     <modules>
         <module>dexa-be</module>
+        <module>dexa-fe</module>
     </modules>
 </project>
