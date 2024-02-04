@@ -3,6 +3,7 @@ import {AttendanceComponent} from './attendance.component';
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {SharedModule} from '../../shared/shared-module';
+import {AttendanceService} from '../../core/services/AttendanceService';
 
 const attendanceRoutes: Routes = [
   {path: '', component: AttendanceComponent}
@@ -16,7 +17,9 @@ const attendanceRoutes: Routes = [
     RouterModule.forChild(attendanceRoutes),
     SharedModule
   ],
-  providers: [],
+  providers: [
+    AttendanceService
+  ],
   exports: [
     RouterModule,
     AttendanceComponent

@@ -19,7 +19,7 @@ public interface AttendanceApi {
             value = "/api/attendance/hit",
             produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<RestWrapper<TbEmployeeAttendance>> getAttendanceHit(@RequestParam(name = "employeeId") BigInteger employeeId,
-                                                                       @RequestParam(name = "attendanceStatus") AttendanceStatusEnum attendanceStatus);
+                                                                       @RequestParam(name = "attendanceStatus") String attendanceStatus);
 
     @GetMapping(
             value = "/api/attendance/summary/perDayOne",

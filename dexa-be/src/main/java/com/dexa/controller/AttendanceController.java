@@ -24,7 +24,7 @@ public class AttendanceController implements AttendanceApi {
 
     @Override
     public ResponseEntity<RestWrapper<TbEmployeeAttendance>> getAttendanceHit(BigInteger employeeId,
-                                                                              AttendanceStatusEnum attendanceStatus) {
+                                                                              String attendanceStatus) {
         return new RestWrapper<TbEmployeeAttendance>().responseWrapper(
                 HttpStatus.CREATED.value(),
                 HttpStatus.CREATED,

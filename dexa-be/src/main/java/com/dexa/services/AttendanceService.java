@@ -9,9 +9,12 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AttendanceService {
@@ -26,19 +29,19 @@ public class AttendanceService {
     }
 
     public TbEmployeeAttendance attendanceAction(BigInteger employeeId,
-                                                 AttendanceStatusEnum attendanceStatus) {
+                                                 String attendanceStatus) {
 
         int countAttendancePerDayMasukPulang =
-                attendanceRepo.dexaCountAttendancePerDayByStatus(employeeId, attendanceStatus.name());
-        if (attendanceStatus.equals(AttendanceStatusEnum.PULANG)) {
+                attendanceRepo.dexaCountAttendancePerDayByStatus(employeeId, attendanceStatus);
+        if (attendanceStatus.equals("PULANG")) {
             int countAttendanceMasuk =
-                    attendanceRepo.dexaCountAttendancePerDayByStatus(employeeId, AttendanceStatusEnum.MASUK.name());
+                    attendanceRepo.dexaCountAttendancePerDayByStatus(employeeId, "MASUK");
             if (countAttendanceMasuk == 0)
                 throw new DexaException("Silahkan Pilih MASUK terlebih dahulu sebelum memilih PULANG.");
         }
 
         if (countAttendancePerDayMasukPulang >= 1)
-            throw new DexaException("Anda sudah melakukan Hit Attendance " + attendanceStatus.name() + ".");
+            throw new DexaException("Anda sudah melakukan Hit Attendance " + attendanceStatus + ".");
 
         int countAttendancePerDay = attendanceRepo.dexaCountAttendancePerDay(employeeId);
         if (countAttendancePerDay >= 2)
@@ -46,7 +49,7 @@ public class AttendanceService {
 
         TbEmployeeAttendance dataPreparation = TbEmployeeAttendance.builder()
                 .dateAndTime(LocalDateTime.now(ZoneId.of("Asia/Jakarta")))
-                .status(attendanceStatus.name())
+                .status(attendanceStatus)
                 .employee(employeeService.getEmployeeById(employeeId))
                 .build();
         attendanceRepo.save(dataPreparation);

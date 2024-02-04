@@ -12,15 +12,18 @@ import java.util.List;
 @Repository
 public interface AttendanceRepo extends JpaRepository<TbEmployeeAttendance, BigInteger> {
     @Query(nativeQuery = true,
-            value = "SELECT COUNT(1) FROM tb_employee_attendance tea WHERE tea.employee_id = ?1 AND DATE(tea.date_and_time) = DATE(NOW())")
+            value = "SELECT COUNT(1) FROM tb_employee_attendance tea WHERE tea.employee_id = ?1 AND DATE(tea.date_and_time) = DATE(CONVERT_TZ(NOW(), 'UTC', 'Asia/Jakarta'))")
     int dexaCountAttendancePerDay(BigInteger employeeId);
 
     @Query(nativeQuery = true,
-            value = "SELECT COUNT(1) FROM tb_employee_attendance tea WHERE tea.employee_id = ?1 AND DATE(tea.date_and_time) = DATE(NOW()) AND tea.status = ?2")
+            value = "SELECT COUNT(1) FROM tb_employee_attendance tea WHERE tea.employee_id = ?1 AND DATE_FORMAT(tea.date_and_time, '%Y-%m-%d') = DATE_FORMAT(CONVERT_TZ(NOW(), 'UTC', 'Asia/Jakarta'), '%Y-%m-%d') AND tea.status = ?2")
     int dexaCountAttendancePerDayByStatus(BigInteger employeeId, String status);
 
     @Query(nativeQuery = true,
-            value = "SELECT * FROM tb_employee_attendance WHERE employee_id = ?1 AND date_and_time >= DATE_FORMAT(NOW(), '%Y-%m-01')")
+            value = "SELECT * " +
+                    "FROM tb_employee_attendance " +
+                    "WHERE employee_id = ?1 " +
+                    "AND date_and_time >= DATE_FORMAT(CONVERT_TZ(NOW(), 'UTC', 'Asia/Jakarta'), '%Y-%m-01')")
     List<TbEmployeeAttendance> dexaGetSummaryAttendance(BigInteger employeeId, Pageable pageable);
 
     @Query(nativeQuery = true,
