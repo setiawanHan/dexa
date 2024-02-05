@@ -46,11 +46,10 @@
       <div class="card card-primary card-outline" [hidden]="isEditCardHide">
         <div class="card-header">
           <p class="card-title float-left text-md text-bold">Edit Profile</p>
-          <button class="btn btn-xs btn-flat btn-danger float-right ml-3" style="width: 8vh;" (click)="onEditClose()">CLOSE</button>
-          <button class="btn btn-xs btn-flat btn-success float-right" style="width: 8vh;" (click)="onDataEditSave()">SAVE</button>
+          <button class="btn btn-xs btn-flat btn-danger float-right ml-2" style="width: 8vh;" (click)="onEditClose()">CLOSE</button>
         </div>
         <div class="card-body">
-          <form #employeeEdit novalidate>
+          <form #employeeEdit (ngSubmit)="onDataEditSave()" novalidate>
             <div class="input-group" [hidden]="!isOnEditPhone">
               <label class="col-1 col-form-label-sm mr-3">Phone Number</label>
               <input type="text"
@@ -67,8 +66,9 @@
                      name="employeePassword"
                      class="form-control form-control-sm"
                      placeholder="Password"
-                     [ngModel]="formDataEmployee.employeeRawPassword">
+                     [(ngModel)]="formDataEmployee.employeeRawPassword">
             </div>
+            <button class="btn btn-xs btn-flat btn-success float-right" style="width: 8vh;" type="submit">SAVE</button>
           </form>
         </div>
       </div>

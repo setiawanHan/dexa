@@ -22,6 +22,7 @@ export class EmployeeService implements IEmployee {
     return this.http.get<RestWrapper<TbEmployeeProfiles>>(url).toPromise();
   }
   updatePasswordAndPhone(employeeId: bigint, employeeNewPassword: string, employeeNewPhone: string): Promise<RestWrapper<string>> {
-    throw new Error('Method not implemented.');
+    const url = `/dexa/api/employee/passwordAndPhone/update?employeeId=${employeeId}&employeeNewPassword=${employeeNewPassword}&employeeNewPhone=${employeeNewPhone}`;
+    return this.http.put<RestWrapper<string>>(url, null).toPromise();
   }
 }

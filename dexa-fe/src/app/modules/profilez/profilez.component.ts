@@ -19,6 +19,8 @@ export class ProfilezComponent implements OnInit {
   public isOnEditPhone = false;
   public isOnEditPassword = false;
 
+  public isOnKeyDown = false;
+
   ngOnInit(): void {
     this.employeeCredentials = JSON.parse(sessionStorage.getItem('EMPLOYEE_CREDS'));
     this.getEmployeeProfileData(this.employeeCredentials.userInfo.employeeId);
@@ -42,11 +44,35 @@ export class ProfilezComponent implements OnInit {
     this.isOnEditPassword = false;
   }
 
-  onDataEditSave(): void {
+  async onDataEditSave(): Promise<void> {
     if (this.isOnEditPhone) {
-      this.onEditClose();
+      if (this.formDataEmployee.employeePhone == null || this.formDataEmployee.employeePhone === '' || this.formDataEmployee.employeePhone === undefined) {
+        alert(`Tidak dapat update dengan value Phone Number kosong.`);
+      } else {
+        const employeeCreds: AuthModel = JSON.parse(sessionStorage.getItem('EMPLOYEE_CREDS'));
+        await this.employeeService.updatePasswordAndPhone(employeeCreds.userInfo.employeeId, '', this.formDataEmployee.employeePhone)
+          .then(d => {
+            this.onEditClose();
+            alert('Update Phone Number Sukses.');
+            this.removeSessionByKey('EMPLOYEE_PROFILES');
+            this.getEmployeeProfileData(employeeCreds.userInfo.employeeId);
+            }, (e: any) => {
+            alert(e.error.responseMessage);
+          });
+      }
     } else if (this.isOnEditPassword) {
-      this.onEditClose();
+      if (this.formDataEmployee.employeeRawPassword == null || this.formDataEmployee.employeeRawPassword === '' || this.formDataEmployee.employeeRawPassword === undefined) {
+        alert(`Tidak dapat update dengan value Password kosong.`);
+      } else {
+        const employeeCreds: AuthModel = JSON.parse(sessionStorage.getItem('EMPLOYEE_CREDS'));
+        await this.employeeService.updatePasswordAndPhone(employeeCreds.userInfo.employeeId, this.formDataEmployee.employeeRawPassword, '')
+          .then(d => {
+            this.onEditClose();
+            alert(`Update Password Sukses. Silahkan Logout dan Login kembali untuk mencoba.`);
+          }, (e: any) => {
+            alert(e.error.responseMessage);
+          });
+      }
     }
   }
 
@@ -62,5 +88,9 @@ export class ProfilezComponent implements OnInit {
     } else {
       this.employeeProfiles = JSON.parse(sessionStorage.getItem('EMPLOYEE_PROFILES'));
     }
+  }
+
+  private removeSessionByKey(sessionKey: string): void {
+    sessionStorage.removeItem('EMPLOYEE_PROFILES');
   }
 }
