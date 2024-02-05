@@ -1,3 +1,14 @@
 <div class="content-wrapper px-2 py-2">
   <p>summaries works!</p>
+
+  <!-- app.component.html -->
+  <h2 style="padding:10px 0 0 20px;">Datepicker Demo</h2>
+  <div style="padding:10px 0 0 20px;">
+    <mat-form-field>
+      <!-- Date picker basic implementation -->
+      <input matInput [matDatepicker]="datepicker">
+      <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+      <mat-datepicker #datepicker></mat-datepicker>
+    </mat-form-field>
+  </div>
 </div>
