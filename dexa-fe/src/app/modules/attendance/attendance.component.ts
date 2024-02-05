@@ -16,8 +16,8 @@ export class AttendanceComponent implements OnInit {
   private dataSubject = new BehaviorSubject<TbEmployeeAttendance[]>([]);
   public tableAttendance$ = this.dataSubject.asObservable();
 
-  async ngOnInit(): Promise<void> {
-    await this.loadAttendanceDataPerDayOne();
+  ngOnInit(): void {
+    this.loadAttendanceDataPerDayOne();
   }
 
   async hit(masukOrPulang: string): Promise<void> {

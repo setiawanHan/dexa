@@ -7,7 +7,7 @@
             <img class="profile-user-img img-fluid img-circle" src="./assets/photo_desc.jpg" alt="User profile picture">
           </div>
           <h3 class="profile-username text-center">{{ employeeCredentials.userInfo.employeeEmail }}</h3>
-          <p class="text-muted text-center">EMPLOYEE_POSITION | {{ employeeCredentials.userInfo.role.roleName }}</p>
+          <p class="text-muted text-center">{{ employeeProfiles.employeePosition }} | {{ employeeCredentials.userInfo.role.roleName }}</p>
           <p class="text-muted text-center">{{ employeeCredentials.employeeAuthenticationSession }}</p>
           <ul class="list-group list-group-unbordered mb-3">
             <li class="list-group-item">
@@ -27,7 +27,7 @@
             <li class="list-group-item">
               <b class="text-sm">Phone Number</b>
               <div class="float-right">
-                <a class="float-left mr-3 text-sm">EMPLOYEE_PHONE</a>
+                <a class="float-left mr-3 text-sm">{{ employeeProfiles.employeePhone }}</a>
                 <button class="btn btn-flat btn-danger btn-xs"
                         style="width: 10vh;"
                         (click)="onEditPhone()" [disabled]="isOnEditPhone">Edit</button>

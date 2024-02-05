@@ -4,6 +4,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {FormsModule} from '@angular/forms';
 import {SharedModule} from '../../shared/shared-module';
 import {ProfilezComponent} from './profilez.component';
+import {EmployeeService} from '../../core/services/EmployeeService';
 
 const profilezRoute: Routes = [
   { path: '', component: ProfilezComponent }
@@ -19,7 +20,9 @@ const profilezRoute: Routes = [
     RouterModule.forChild(profilezRoute),
     SharedModule
   ],
-  providers: [],
+  providers: [
+    EmployeeService
+  ],
   exports: [
     RouterModule,
     ProfilezComponent

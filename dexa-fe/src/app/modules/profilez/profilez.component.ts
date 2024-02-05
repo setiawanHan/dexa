@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthModel} from '../../model/AuthModel';
+import {EmployeeService} from '../../core/services/EmployeeService';
+import {TbEmployeeProfiles} from '../../model/TbEmployeeProfiles';
 
 @Component({
   selector: 'app-profilez',
@@ -7,10 +9,11 @@ import {AuthModel} from '../../model/AuthModel';
   styleUrls: []
 })
 export class ProfilezComponent implements OnInit {
-  constructor() { }
+  constructor(private employeeService: EmployeeService) { }
 
   formDataEmployee = { employeePhone: '', employeeRawPassword: '' };
   employeeCredentials: AuthModel;
+  employeeProfiles: TbEmployeeProfiles;
 
   public isEditCardHide = true;
   public isOnEditPhone = false;
@@ -18,6 +21,7 @@ export class ProfilezComponent implements OnInit {
 
   ngOnInit(): void {
     this.employeeCredentials = JSON.parse(sessionStorage.getItem('EMPLOYEE_CREDS'));
+    this.getEmployeeProfileData(this.employeeCredentials.userInfo.employeeId);
   }
 
   onEditPhone(): void {
@@ -43,6 +47,20 @@ export class ProfilezComponent implements OnInit {
       this.onEditClose();
     } else if (this.isOnEditPassword) {
       this.onEditClose();
+    }
+  }
+
+  private async getEmployeeProfileData(employeeId: bigint): Promise<void> {
+    const employeeProfilesSession = JSON.parse(sessionStorage.getItem('EMPLOYEE_PROFILES'));
+    if (employeeProfilesSession == null) {
+      await this.employeeService.getEmployeeProfile(employeeId).then(d => {
+        this.employeeProfiles = d.data;
+        sessionStorage.setItem('EMPLOYEE_PROFILES', JSON.stringify(d.data));
+      }, (e: any) => {
+        alert(e.error.responseMessage);
+      });
+    } else {
+      this.employeeProfiles = JSON.parse(sessionStorage.getItem('EMPLOYEE_PROFILES'));
     }
   }
 }
