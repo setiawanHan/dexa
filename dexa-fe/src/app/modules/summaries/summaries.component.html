@@ -6,71 +6,42 @@
           <h3 class="col-sm-12 text-sm-center text-lg-left m-0 p-0">Attendance Summary</h3>
           <div class="row d-flex justify-content-sm-center justify-content-lg-end">
             <mat-form-field class="col-sm-12 col-lg-2 m-0 p-0 mr-1">
-              <input matInput [matDatepicker]="datepickerFrom" placeholder="Date From">
+              <input matInput [matDatepicker]="datepickerFrom" placeholder="Date From" [(ngModel)]="selectedDateFrom">
               <mat-datepicker-toggle matSuffix [for]="datepickerFrom"></mat-datepicker-toggle>
-              <mat-datepicker #datepickerFrom></mat-datepicker>
+              <mat-datepicker #datepickerFrom (dateChange)="onDateFromChange($event)"></mat-datepicker>
             </mat-form-field>
             <mat-form-field class="col-sm-12 col-lg-2 m-0 p-0">
-              <input matInput [matDatepicker]="datepickerTo" placeholder="Date To">
+              <input matInput [matDatepicker]="datepickerTo" placeholder="Date To" [(ngModel)]="selectedDateTo">
               <mat-datepicker-toggle matSuffix [for]="datepickerTo"></mat-datepicker-toggle>
-              <mat-datepicker #datepickerTo></mat-datepicker>
+              <mat-datepicker #datepickerTo (dateChange)="onDateToChange($event)"></mat-datepicker>
             </mat-form-field>
           </div>
           <div class="row d-flex justify-content-sm-center justify-content-lg-end" style="margin-top: -10px;">
-            <button class="col-sm-12 col-lg-1 btn btn-sm btn-flat btn-outline-dark"><i class="fas fa-search mr-2"></i> SEARCH</button>
+            <button class="col-sm-12 col-lg-1 btn btn-sm btn-flat btn-outline-danger mr-lg-2 mb-sm-2 mb-lg-0" (click)="onRefreshSummary()">
+              <i class="fas fa-arrow-circle-left mr-2"></i> RESET
+            </button>
+            <button class="col-sm-12 col-lg-1 btn btn-sm btn-flat btn-outline-dark" (click)="onCl()" >
+              <i class="fas fa-search mr-2"></i> SEARCH
+            </button>
           </div>
           <div class="row mt-5 table-responsive m-0 p-0" style="max-height: 750px;">
             <table class="table table-head-fixed table-bordered table-hover text-nowrap table-sm">
               <thead>
               <tr>
-                <th>Attendance ID</th>
-                <th>Employee ID</th>
+                <th>Role</th>
                 <th>Employee Name</th>
-                <th>Role Name</th>
+                <th>Employee Position</th>
                 <th>Waktu</th>
                 <th>Status</th>
               </tr>
               </thead>
               <tbody>
-              <tr>
-                <td>COL1</td>
-                <td>COL2</td>
-                <td>COL3</td>
-                <td>COL4</td>
-                <td>COL5</td>
-                <td>COL6</td>
-              </tr>
-              <tr>
-                <td>COL1</td>
-                <td>COL2</td>
-                <td>COL3</td>
-                <td>COL4</td>
-                <td>COL5</td>
-                <td>COL6</td>
-              </tr>
-              <tr>
-                <td>COL1</td>
-                <td>COL2</td>
-                <td>COL3</td>
-                <td>COL4</td>
-                <td>COL5</td>
-                <td>COL6</td>
-              </tr>
-              <tr>
-                <td>COL1</td>
-                <td>COL2</td>
-                <td>COL3</td>
-                <td>COL4</td>
-                <td>COL5</td>
-                <td>COL6</td>
-              </tr>
-              <tr>
-                <td>COL1</td>
-                <td>COL2</td>
-                <td>COL3</td>
-                <td>COL4</td>
-                <td>COL5</td>
-                <td>COL6</td>
+              <tr *ngFor="let att of tableAttendance$ | async as data">
+                <td>{{ att.employee.role.roleName }}</td>
+                <td>{{ att.employee.employeeEmail }}</td>
+                <td>{{ att.employee.employeeProfiles.employeePosition }}</td>
+                <td>{{ att.dateAndTime }}</td>
+                <td>{{ att.status }}</td>
               </tr>
               </tbody>
             </table>

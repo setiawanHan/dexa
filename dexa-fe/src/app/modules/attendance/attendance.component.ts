@@ -1,9 +1,9 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AttendanceService} from '../../core/services/AttendanceService';
 import {AuthModel} from '../../model/AuthModel';
-import {error, promise} from 'protractor';
 import {TbEmployeeAttendance} from '../../model/TbEmployeeAttendance';
-import {BehaviorSubject, Observable, Subject} from 'rxjs';
+import {BehaviorSubject} from 'rxjs';
+import {Utils} from '../../utils/Utils';
 
 @Component({
   selector: 'app-attendance',
@@ -16,20 +16,20 @@ export class AttendanceComponent implements OnInit {
   private dataSubject = new BehaviorSubject<TbEmployeeAttendance[]>([]);
   public tableAttendance$ = this.dataSubject.asObservable();
 
-  ngOnInit(): void {
-    this.loadAttendanceDataPerDayOne();
+  async ngOnInit(): Promise<void> {
+    await this.loadAttendanceDataPerDayOne();
   }
 
   async hit(masukOrPulang: string): Promise<void> {
-    const sessStorage: AuthModel = JSON.parse(sessionStorage.getItem('EMPLOYEE_CREDS'));
+    const sessStorage: AuthModel = Utils.getSessionStorageByKey<AuthModel>('EMPLOYEE_CREDS');
     const employeeId: bigint = sessStorage.userInfo.employeeId;
 
     await this.attendanceService.getAttendanceHit(employeeId, masukOrPulang).then(d => {
       if (masukOrPulang === 'MASUK') {
-        alert(`MASUK pada ( ${d.data.dateAndTime} )`);
+        alert(`MASUK --( ${d.data.dateAndTime} )`);
         this.loadAttendanceDataPerDayOne();
       } else {
-        alert(`PULANG pada ( ${d.data.dateAndTime} )`);
+        alert(`PULANG -- ( ${d.data.dateAndTime} )`);
         this.loadAttendanceDataPerDayOne();
       }
     }, (e: any) => {
@@ -38,7 +38,7 @@ export class AttendanceComponent implements OnInit {
   }
 
   async loadAttendanceDataPerDayOne(): Promise<void> {
-    const sessStorage: AuthModel = JSON.parse(sessionStorage.getItem('EMPLOYEE_CREDS'));
+    const sessStorage: AuthModel = Utils.getSessionStorageByKey<AuthModel>('EMPLOYEE_CREDS');
     const employeeId: bigint = sessStorage.userInfo.employeeId;
 
     await this.attendanceService.getAttendanceSummaryPerDayOne(employeeId, 0, 1000).then(d => {

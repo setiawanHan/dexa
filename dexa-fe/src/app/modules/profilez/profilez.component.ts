@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AuthModel} from '../../model/AuthModel';
 import {EmployeeService} from '../../core/services/EmployeeService';
 import {TbEmployeeProfiles} from '../../model/TbEmployeeProfiles';
+import {Utils} from '../../utils/Utils';
 
 @Component({
   selector: 'app-profilez',
@@ -21,9 +22,9 @@ export class ProfilezComponent implements OnInit {
 
   public isOnKeyDown = false;
 
-  ngOnInit(): void {
-    this.employeeCredentials = JSON.parse(sessionStorage.getItem('EMPLOYEE_CREDS'));
-    this.getEmployeeProfileData(this.employeeCredentials.userInfo.employeeId);
+  async ngOnInit(): Promise<void> {
+    this.employeeCredentials = Utils.getSessionStorageByKey<AuthModel>('EMPLOYEE_CREDS');
+    await this.getEmployeeProfileData(this.employeeCredentials.userInfo.employeeId);
   }
 
   onEditPhone(): void {

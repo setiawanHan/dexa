@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {HeaderComponent} from './components/header/header.component';
-import {CommonModule} from '@angular/common';
+import {CommonModule, DatePipe} from '@angular/common';
 import {SidebarComponent} from './components/sidebar/sidebar.component';
 import {AuthenticationService} from '../core/services/AuthenticationService';
 import {MatFormFieldModule} from '@angular/material/form-field';
