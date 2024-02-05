@@ -9,7 +9,7 @@ export class AttendanceService implements IAttendance {
 
   constructor(private http: HttpClient) {}
   getAttendanceHit(employeeId: bigint, attendanceStatus: string): Promise<RestWrapper<TbEmployeeAttendance>> {
-    const url = `/dexa//api/attendance/hit?employeeId=${employeeId}&attendanceStatus=${attendanceStatus}`;
+    const url = `/dexa/api/attendance/hit?employeeId=${employeeId}&attendanceStatus=${attendanceStatus}`;
     return this.http.get<RestWrapper<TbEmployeeAttendance>>(url).toPromise();
   }
   getAttendanceSummaryPerDayOne(employeeId: bigint, pageNo: number, pageSize: number): RestWrapper<TbEmployeeAttendance[]> {
