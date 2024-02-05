@@ -17,7 +17,7 @@ export class AttendanceComponent implements OnInit {
   public tableAttendance$ = this.dataSubject.asObservable();
 
   async ngOnInit(): Promise<void> {
-    await this.loadAttendanceDataPerDayOne();
+    // await this.loadAttendanceDataPerDayOne();
   }
 
   async hit(masukOrPulang: string): Promise<void> {
