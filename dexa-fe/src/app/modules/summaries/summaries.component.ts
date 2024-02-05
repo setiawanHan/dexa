@@ -26,19 +26,48 @@ export class SummariesComponent implements OnInit {
 
   async onRefreshSummary(): Promise<void> {
     await this.loadAttendancePerDayOne()
-      .then(() => alert('Reset Sukses.'));
+      .then(() => {
+        alert('Reset Sukses.');
+        this.onClearDatePicker();
+      });
   }
 
   onDateFromChange($event: any): void {}
   onDateToChange($event: any): void {}
-  onCl(): void {
-    console.log('Button Clicked with Date:', this.datePipe.transform(this.selectedDateFrom, 'yyyy-MM-dd') || '');
+  onClearDatePicker(): void {
+    this.selectedDateFrom = null;
+    this.selectedDateTo = null;
+  }
+
+  async onSearch(): Promise<void> {
+    const dFrom = this.datePipe.transform(this.selectedDateFrom, 'yyyy-MM-dd') || '';
+    const dTo = this.datePipe.transform(this.selectedDateTo, 'yyyy-MM-dd') || '';
+
+    if (dFrom === '' || dTo === '') {
+      alert('Mohon isi (Date From) dan (Date To) Secara Lengkap.');
+    } else {
+      await this.loadAttendanceByRange();
+    }
   }
 
   private async loadAttendancePerDayOne(): Promise<void> {
     const employeeCreds: AuthModel = Utils.getSessionStorageByKey<AuthModel>('EMPLOYEE_CREDS');
     await this.attendanceService.getAttendanceSummaryPerDayOne(employeeCreds.userInfo.employeeId, 0, 1000).then(d => {
       this.dataSubject.next(d.data);
+    }, (e: any) => {
+      alert(e.error.responseMessage);
+    });
+  }
+
+  private async loadAttendanceByRange(): Promise<void> {
+    const employeeCreds: AuthModel = Utils.getSessionStorageByKey<AuthModel>('EMPLOYEE_CREDS');
+    await this.attendanceService.getAttendanceSummaryPerRangeDay(
+      employeeCreds.userInfo.employeeId,
+      this.datePipe.transform(this.selectedDateFrom, 'yyyy-MM-dd'),
+      this.datePipe.transform(this.selectedDateTo, 'yyyy-MM-dd'),
+      0,
+      1000).then(d => {
+        this.dataSubject.next(d.data);
     }, (e: any) => {
       alert(e.error.responseMessage);
     });

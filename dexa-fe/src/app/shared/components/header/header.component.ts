@@ -18,12 +18,14 @@ export class HeaderComponent implements OnInit {
 
   async logout(): Promise<void> {
     const employeeCreds: AuthModel = JSON.parse(sessionStorage.getItem('EMPLOYEE_CREDS'));
-    await this.authenticationService.logout(employeeCreds.userInfo.employeeEmail).then(d => {
-      sessionStorage.clear();
-      this.routeAndReload(['/authentication']);
-    }).catch((e: any) => {
-      alert(e.error.responseMessage);
-    });
+    await this.authenticationService.logout(employeeCreds.userInfo.employeeEmail)
+      .then(d => {
+        sessionStorage.clear();
+        this.routeAndReload(['/authentication']);
+      })
+      .catch((e: any) => {
+        alert(e.error.responseMessage);
+      });
   }
 
   private checkSessionToShowOrHideNavBar(): void {
@@ -35,6 +37,7 @@ export class HeaderComponent implements OnInit {
   }
 
   private routeAndReload(commands: any[]): void {
-    this.router.navigate(commands).then(r => window.location.reload());
+    this.router.navigate(commands)
+      .then(() => window.location.reload());
   }
 }
