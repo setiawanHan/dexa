@@ -1,4 +1,21 @@
-<div class="hold-transition login-page">
+<style>
+  #loginBG {
+    background-image: url('assets/titan_dexa.png');
+    background-size: cover; /* Untuk memastikan gambar selalu menutupi seluruh body */
+    background-position: center; /* Posisi gambar latar belakang di tengah */
+    background-repeat: no-repeat; /* Menghindari pengulangan gambar latar belakang */
+  }
+  #loginBG::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.5);
+  }
+</style>
+<div class="hold-transition login-page" id="loginBG">
 <div class="login-box">
   <div class="card">
     <div class="card-body login-card-body">
