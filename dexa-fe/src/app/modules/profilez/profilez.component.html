@@ -1,10 +1,10 @@
 <div class="content-wrapper px-2 py-2 ">
   <div class="row">
     <div class="col-md-12">
-      <div class="card card-outline">
+      <div class="card card-purple card-outline">
         <div class="card-body box-profile">
           <div class="text-center">
-            <img class="profile-user-img img-fluid img-circle" src="./assets/photo_desc.jpg" alt="User profile picture">
+            <img class="profile-user-img img-fluid img-circle border-dark" src="./assets/photo_desc.jpg" alt="User profile picture">
           </div>
           <h3 class="profile-username text-center">{{ employeeCredentials.userInfo.employeeEmail }}</h3>
           <p class="text-muted text-center">{{ employeeProfiles.employeePosition }} | {{ employeeCredentials.userInfo.role.roleName }}</p>
@@ -12,7 +12,7 @@
           <ul class="list-group list-group-unbordered mb-3">
             <li class="list-group-item">
               <b class="text-sm">Emails</b>
-              <a class="float-right text-sm">{{ employeeCredentials.userInfo.employeeEmail }}</a>
+              <a class="float-right text-purple text-sm">{{ employeeCredentials.userInfo.employeeEmail }}</a>
             </li>
             <li class="list-group-item">
               <b class="text-sm">Is Active</b>
@@ -22,13 +22,13 @@
             </li>
             <li class="list-group-item">
               <b class="text-sm">Role Name</b>
-              <a class="float-right text-sm">{{ employeeCredentials.userInfo.role.roleName }}</a>
+              <a class="float-right text-purple text-sm">{{ employeeCredentials.userInfo.role.roleName }}</a>
             </li>
             <li class="list-group-item">
               <b class="text-sm">Phone Number</b>
               <div class="float-right">
-                <a class="float-left mr-3 text-sm">{{ employeeProfiles.employeePhone }}</a>
-                <button class="btn btn-flat btn-danger btn-xs"
+                <a class="float-left mr-3 text-purple text-sm">{{ employeeProfiles.employeePhone }}</a>
+                <button class="btn btn-flat btn-outline-dark btn-xs"
                         style="width: 10vh;"
                         (click)="onEditPhone()" [disabled]="isOnEditPhone">Edit</button>
               </div>
@@ -36,22 +36,18 @@
             <li class="list-group-item">
               <b class="text-sm">Employee Password</b>
               <div class="float-right">
-                <a class="float-left mr-3 text-sm">********************</a>
-                <button class="btn btn-flat btn-danger btn-xs" style="width: 10vh;" (click)="onEditPassword()" [disabled]="isOnEditPassword">Edit</button>
+                <a class="float-left mr-3 text-purple text-sm">********************</a>
+                <button class="btn btn-flat btn-outline-dark btn-xs" style="width: 10vh;" (click)="onEditPassword()" [disabled]="isOnEditPassword">Edit</button>
               </div>
             </li>
           </ul>
         </div>
       </div>
-      <div class="card card-primary card-outline" [hidden]="isEditCardHide">
-        <div class="card-header">
-          <p class="card-title float-left text-md text-bold">Edit Profile</p>
-          <button class="btn btn-xs btn-flat btn-danger float-right ml-2" style="width: 8vh;" (click)="onEditClose()">CLOSE</button>
-        </div>
+      <div class="card card-purple card-outline" [hidden]="isEditCardHide"> <!-- isEditCardHide -->
         <div class="card-body">
           <form #employeeEdit (ngSubmit)="onDataEditSave()" novalidate>
-            <div class="input-group" [hidden]="!isOnEditPhone">
-              <label class="col-1 col-form-label-sm mr-3">Phone Number</label>
+            <div class="form-group mb-2" [hidden]="!isOnEditPhone"> <!-- !isOnEditPhone -->
+              <label class="col-form-label col-form-label-sm">Phone Number</label>
               <input type="text"
                      id="employeePhone"
                      name="employeePhone"
@@ -59,8 +55,8 @@
                      placeholder="Phone Number"
                      [(ngModel)]="formDataEmployee.employeePhone">
             </div>
-            <div class="input-group" [hidden]="!isOnEditPassword">
-              <label class="col-1 col-form-label-sm mr-3">Password</label>
+            <div class="form-group mb-2" [hidden]="!isOnEditPassword"> <!-- !isOnEditPassword -->
+              <label class="col-form-label col-form-label-sm">Password</label>
               <input type="password"
                      id="employeePassword"
                      name="employeePassword"
@@ -68,7 +64,10 @@
                      placeholder="Password"
                      [(ngModel)]="formDataEmployee.employeeRawPassword">
             </div>
-            <button class="btn btn-xs btn-flat btn-success float-right" style="width: 8vh;" type="submit">SAVE</button>
+            <div class="d-flex form-group d-block justify-content-end">
+              <button class="btn btn-xs btn-flat btn-outline-dark float-right px-4 mr-1" type="submit">SAVE</button>
+              <button class="btn btn-xs btn-flat btn-outline-danger float-right px-3" (click)="onEditClose()">CLOSE</button>
+            </div>
           </form>
         </div>
       </div>

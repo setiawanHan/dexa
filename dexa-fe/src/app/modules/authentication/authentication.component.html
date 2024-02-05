@@ -16,7 +16,7 @@
   }
 </style>
 <div class="hold-transition login-page" id="loginBG">
-<div class="login-box">
+<div class="login-box" >
   <div class="card">
     <div class="card-body login-card-body">
       <p class="login-box-msg"><b>ATTENDANCE SYSTEM</b></p>
@@ -26,7 +26,7 @@
                  id="employeeEmail"
                  name="employeeEmail"
                  [(ngModel)]="fd.employeeEmail"
-                 class="form-control"
+                 class="form-control form-control-sm"
                  placeholder="Email">
           <div class="input-group-append">
             <div class="input-group-text"><span class="fas fa-envelope"></span></div>
@@ -37,13 +37,13 @@
                  id="employeeRawPassword"
                  name="employeeRawPassword"
                  [(ngModel)]="fd.employeeRawPassword"
-                 class="form-control"
+                 class="form-control form-control-sm"
                  placeholder="Password">
           <div class="input-group-append">
             <div class="input-group-text"><span class="fas fa-lock"></span></div>
           </div>
         </div>
-        <button type="submit" class="btn-block btn-danger"><i class="fa fa-power-off mr-1"></i> Login</button>
+        <button type="submit" class="btn btn-block btn-flat btn-sm btn-danger"><i class="fa fa-power-off mr-1"></i> Login</button>
       </form>
     </div>
   </div>
