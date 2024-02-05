@@ -1,12 +1,32 @@
 <div class="content-wrapper px-2 py-2 ">
   <div class="card">
-    <div class="card-body d-flex">
-      <div class="col">
-        <button type="button" class="btn btn-success btn-block" (click)="hit('MASUK')">MASUK</button>
-      </div>
-      <div class="col">
-        <button type="button" class="btn btn-danger btn-block" (click)="hit('PULANG')">PULANG</button>
-      </div>
+    <div class="card-body d-flex justify-content-start">
+      <button type="button" class="btn btn-success btn-flat" style="width: 100vh;" (click)="hit('MASUK')">MASUK</button>
+      <button type="button" class="btn btn-danger btn-flat ml-1" style="width: 100vh;" (click)="hit('PULANG')">PULANG</button>
+    </div>
+    <div class="card-body table-responsive p-0 px-2" style="height: 300px;">
+      <table class="table table-head-fixed table-hover text-nowrap table-sm">
+        <thead>
+        <tr>
+          <th>Attendance ID</th>
+          <th>Employee ID</th>
+          <th>Employee Name</th>
+          <th>Role Name</th>
+          <th>Waktu</th>
+          <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let att of tableAttendance$ | async as data">
+          <td>{{ att.attendanceId }}</td>
+          <td>{{ att.employee.employeeId }}</td>
+          <td>{{ att.employee.employeeProfiles.employeeName }}</td>
+          <td>{{ att.employee.role.roleName }}</td>
+          <td>{{ att.dateAndTime }}</td>
+          <td>{{ att.status }}</td>
+        </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>

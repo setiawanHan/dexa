@@ -1,5 +1,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4" [hidden]="hideSideBar">
-  <a href="#" class="brand-link text-center">
+  <a style="cursor: pointer"
+     (click)="menuIdef('/attendance')"
+      class="brand-link text-center">
     <span class="brand-text font-weight-light font-weight-bolder">Dexa Medica</span>
   </a>
 
@@ -7,15 +9,17 @@
     <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <li class="nav-item">
-          <a href="/dexa/attendance"
-             class="nav-link {{ menuId == '/attendance' ? 'active' : '' }}"
+          <a style="cursor: pointer" class="nav-link {{ menuId == '/attendance' ? 'active' : '' }}"
              (click)="menuIdef('/attendance')">
-            <i class="nav-icon fas fa-clock"></i><p> Attendance </p></a>
+            <i class="nav-icon fas fa-clock"></i><p> Attendance </p>
+          </a>
         </li>
         <li class="nav-item">
-          <a href="/dexa/profilez"
-             class="nav-link {{ menuId == '/profilez' ? 'active' : '' }}" (click)="menuIdef('/profilez')">
-            <i class="nav-icon fas fa-user"></i><p> Profiles </p></a>
+          <a style="cursor: pointer"
+             class="nav-link {{ menuId == '/profilez' ? 'active' : '' }}"
+             (click)="menuIdef('/profilez')">
+            <i class="nav-icon fas fa-user"></i><p> Profiles </p>
+          </a>
         </li>
         <li class="nav-item">
           <a href="#" class="nav-link"><i class="nav-icon fas fa-calculator"></i><p> Summary </p></a>

@@ -7,7 +7,7 @@ import {Router} from '@angular/router';
   styleUrls: []
 })
 export class SidebarComponent implements OnInit {
-  constructor() {}
+  constructor(private router: Router) {}
 
   public hideSideBar = true;
   public menuId = '';
@@ -29,5 +29,6 @@ export class SidebarComponent implements OnInit {
     sessionStorage.removeItem('ACTIVE_MENU');
     sessionStorage.setItem('ACTIVE_MENU', s);
     this.menuId = sessionStorage.getItem('ACTIVE_MENU');
+    this.router.navigate([s]);
   }
 }

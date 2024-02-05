@@ -12,8 +12,9 @@ export class AttendanceService implements IAttendance {
     const url = `/dexa/api/attendance/hit?employeeId=${employeeId}&attendanceStatus=${attendanceStatus}`;
     return this.http.get<RestWrapper<TbEmployeeAttendance>>(url).toPromise();
   }
-  getAttendanceSummaryPerDayOne(employeeId: bigint, pageNo: number, pageSize: number): RestWrapper<TbEmployeeAttendance[]> {
-    throw new Error('Method not implemented.');
+  getAttendanceSummaryPerDayOne(employeeId: bigint, pageNo: number, pageSize: number): Promise<RestWrapper<TbEmployeeAttendance[]>> {
+    const url = `/dexa/api/attendance/summary/perDayOne?employeeId=${employeeId}&pageNo=${pageNo}&pageSize=${pageSize}`;
+    return this.http.get<RestWrapper<TbEmployeeAttendance[]>>(url).toPromise();
   }
   getAttendanceSummaryPerRangeDay(employeeId: bigint, dateFrom: string, dateTo: string, pageNo: number, pageSize: number): RestWrapper<TbEmployeeAttendance[]> {
     throw new Error('Method not implemented.');

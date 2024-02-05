@@ -1,7 +1,77 @@
 <div class="content-wrapper px-2 py-2 ">
-  <div class="card">
-    <div class="card-body d-flex">
-      <h1>HW</h1>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card card-primary card-outline">
+        <div class="card-body box-profile">
+          <div class="text-center">
+            <img class="profile-user-img img-fluid img-circle" src="./assets/photo_desc.jpg" alt="User profile picture">
+          </div>
+          <h3 class="profile-username text-center">{{ employeeCredentials.userInfo.employeeEmail }}</h3>
+          <p class="text-muted text-center">EMPLOYEE_POSITION | {{ employeeCredentials.userInfo.role.roleName }}</p>
+          <p class="text-muted text-center">{{ employeeCredentials.employeeAuthenticationSession }}</p>
+          <ul class="list-group list-group-unbordered mb-3">
+            <li class="list-group-item">
+              <b class="text-sm">Emails</b>
+              <a class="float-right text-sm">{{ employeeCredentials.userInfo.employeeEmail }}</a>
+            </li>
+            <li class="list-group-item">
+              <b class="text-sm">Is Active</b>
+              <a class="float-right text-sm badge badge-{{ employeeCredentials.employeeIsAuthenticated == true ? 'success' : 'danger' }}">
+                {{ employeeCredentials.employeeIsAuthenticated }}
+              </a>
+            </li>
+            <li class="list-group-item">
+              <b class="text-sm">Role Name</b>
+              <a class="float-right text-sm">{{ employeeCredentials.userInfo.role.roleName }}</a>
+            </li>
+            <li class="list-group-item">
+              <b class="text-sm">Phone Number</b>
+              <div class="float-right">
+                <a class="float-left mr-3 text-sm">EMPLOYEE_PHONE</a>
+                <button class="btn btn-flat btn-danger btn-xs"
+                        style="width: 10vh;"
+                        (click)="onEditPhone()" [disabled]="isOnEditPhone">Edit</button>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <b class="text-sm">Employee Password</b>
+              <div class="float-right">
+                <a class="float-left mr-3 text-sm">********************</a>
+                <button class="btn btn-flat btn-danger btn-xs" style="width: 10vh;" (click)="onEditPassword()" [disabled]="isOnEditPassword">Edit</button>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="card card-primary card-outline" [hidden]="isEditCardHide">
+        <div class="card-header">
+          <p class="card-title float-left text-md text-bold">Edit Profile</p>
+          <button class="btn btn-xs btn-flat btn-danger float-right ml-3" style="width: 8vh;" (click)="onEditClose()">CLOSE</button>
+          <button class="btn btn-xs btn-flat btn-success float-right" style="width: 8vh;" (click)="onDataEditSave()">SAVE</button>
+        </div>
+        <div class="card-body">
+          <form #employeeEdit novalidate>
+            <div class="input-group" [hidden]="!isOnEditPhone">
+              <label class="col-1 col-form-label-sm mr-3">Phone Number</label>
+              <input type="text"
+                     id="employeePhone"
+                     name="employeePhone"
+                     class="form-control form-control-sm"
+                     placeholder="Phone Number"
+                     [(ngModel)]="formDataEmployee.employeePhone">
+            </div>
+            <div class="input-group" [hidden]="!isOnEditPassword">
+              <label class="col-1 col-form-label-sm mr-3">Password</label>
+              <input type="password"
+                     id="employeePassword"
+                     name="employeePassword"
+                     class="form-control form-control-sm"
+                     placeholder="Password"
+                     [ngModel]="formDataEmployee.employeeRawPassword">
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
 </div>
