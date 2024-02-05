@@ -1,7 +1,83 @@
 <div class="content-wrapper px-2 py-2">
-  <mat-form-field>
-    <input matInput [matDatepicker]="datepicker" placeholder="Choose a Date">
-    <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
-    <mat-datepicker #datepicker></mat-datepicker>
-  </mat-form-field>
+  <div class="col-12">
+    <div class="card card-purple card-outline">
+      <div class="card-body">
+        <div class="">
+          <h3 class="col-sm-12 text-sm-center text-lg-left m-0 p-0">Attendance Summary</h3>
+          <div class="row d-flex justify-content-sm-center justify-content-lg-end">
+            <mat-form-field class="col-sm-12 col-lg-2 m-0 p-0 mr-1">
+              <input matInput [matDatepicker]="datepickerFrom" placeholder="Date From">
+              <mat-datepicker-toggle matSuffix [for]="datepickerFrom"></mat-datepicker-toggle>
+              <mat-datepicker #datepickerFrom></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field class="col-sm-12 col-lg-2 m-0 p-0">
+              <input matInput [matDatepicker]="datepickerTo" placeholder="Date To">
+              <mat-datepicker-toggle matSuffix [for]="datepickerTo"></mat-datepicker-toggle>
+              <mat-datepicker #datepickerTo></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="row d-flex justify-content-sm-center justify-content-lg-end" style="margin-top: -10px;">
+            <button class="col-sm-12 col-lg-1 btn btn-sm btn-flat btn-outline-dark"><i class="fas fa-search mr-2"></i> SEARCH</button>
+          </div>
+          <div class="row mt-5 table-responsive m-0 p-0" style="max-height: 750px;">
+            <table class="table table-head-fixed table-bordered table-hover text-nowrap table-sm">
+              <thead>
+              <tr>
+                <th>Attendance ID</th>
+                <th>Employee ID</th>
+                <th>Employee Name</th>
+                <th>Role Name</th>
+                <th>Waktu</th>
+                <th>Status</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td>COL1</td>
+                <td>COL2</td>
+                <td>COL3</td>
+                <td>COL4</td>
+                <td>COL5</td>
+                <td>COL6</td>
+              </tr>
+              <tr>
+                <td>COL1</td>
+                <td>COL2</td>
+                <td>COL3</td>
+                <td>COL4</td>
+                <td>COL5</td>
+                <td>COL6</td>
+              </tr>
+              <tr>
+                <td>COL1</td>
+                <td>COL2</td>
+                <td>COL3</td>
+                <td>COL4</td>
+                <td>COL5</td>
+                <td>COL6</td>
+              </tr>
+              <tr>
+                <td>COL1</td>
+                <td>COL2</td>
+                <td>COL3</td>
+                <td>COL4</td>
+                <td>COL5</td>
+                <td>COL6</td>
+              </tr>
+              <tr>
+                <td>COL1</td>
+                <td>COL2</td>
+                <td>COL3</td>
+                <td>COL4</td>
+                <td>COL5</td>
+                <td>COL6</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
